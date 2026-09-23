@@ -629,7 +629,7 @@ function emailHtml(){
                   <tr>
                     <td width="175" valign="middle" align="center" style="padding:17px 8px 17px 17px;">
                       <table role="presentation" width="145" cellspacing="0" cellpadding="0" border="0" bgcolor="#ede1ff" style="width:145px;background:#ede1ff;border:3px solid #5b2a86;">
-                        <tr><td align="center" style="padding:8px 8px 4px;background:#ffd9e8;" bgcolor="#ffd9e8"><img src="cid:camillePortrait" width="129" alt="Camille Charette, Rock Campus librarian" style="display:block;width:129px;max-width:129px;height:auto;border:0;border-radius:8px;"></td></tr>
+                        <tr><td align="center" style="padding:8px 8px 4px;background:#ffd9e8;" bgcolor="#ffd9e8"><img src="cid:camillePhoto" width="129" alt="Camille Charette, Rock Campus librarian" style="display:block;width:129px;max-width:129px;height:auto;border:0;border-radius:8px;"></td></tr>
                         <tr><td align="center" style="padding-top:6px;font-family:Arial,sans-serif;font-size:17px;color:#5b2a86;font-weight:900;">✦ ♡ ✦</td></tr>
                         <tr><td align="center" style="padding:2px 4px 8px 4px;"><span style="display:inline-block;background:#ffd9e8;padding:5px 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:900;color:#5b2a86;">ASK ME ANYTHING ♡</span></td></tr>
                       </table>
@@ -714,7 +714,7 @@ $("email-results-btn").onclick=()=>{
   setTimeout(()=>$("email-address").focus(),50);
 };
 $("email-close").onclick=()=>$("email-dialog").close();
-$("email-form").addEventListener("submit",e=>{
+$("email-form").addEventListener("submit",async e=>{
   e.preventDefault();
   const email=$("email-address").value.trim();
   const status=$("email-status");
@@ -725,48 +725,28 @@ $("email-form").addEventListener("submit",e=>{
   }
   status.className="email-status info";
   status.textContent="Sending your Glow-Up…";
-
-  let frame=document.getElementById("email-delivery-frame");
-  if(!frame){
-    frame=document.createElement("iframe");
-    frame.id="email-delivery-frame";
-    frame.name="email-delivery-frame";
-    frame.title="Email delivery";
-    frame.hidden=true;
-    frame.setAttribute("aria-hidden","true");
-    document.body.appendChild(frame);
+  try{
+    await fetch(EMAIL_ENDPOINT,{
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({
+        action:"send_email",
+        email:email,
+        subject:"Your Wellness Glow-Up",
+        message:emailMessage(),
+        html_message:emailHtml(),
+        photo_base64:LIBRARIAN.portraitBase64,
+        photo_mime:LIBRARIAN.portraitMime
+      })
+    });
+    status.className="email-status success";
+    status.textContent="Your Glow-Up was submitted for email delivery.";
+    setTimeout(()=>$("email-dialog").close(),1800);
+  }catch(err){
+    status.className="email-status error";
+    status.textContent="That didn't submit. Please try again.";
   }
-
-  const deliveryForm=document.createElement("form");
-  deliveryForm.method="POST";
-  deliveryForm.action=EMAIL_ENDPOINT;
-  deliveryForm.target="email-delivery-frame";
-  deliveryForm.acceptCharset="UTF-8";
-  deliveryForm.style.display="none";
-
-  const payload={
-    action:"send_email",
-    email:email,
-    subject:"Your Wellness Glow-Up",
-    message:emailMessage(),
-    html_message:emailHtml(),
-    portrait_base64:LIBRARIAN.portraitBase64 || ""
-  };
-
-  Object.entries(payload).forEach(([name,value])=>{
-    const field=document.createElement("textarea");
-    field.name=name;
-    field.value=value;
-    deliveryForm.appendChild(field);
-  });
-
-  document.body.appendChild(deliveryForm);
-  deliveryForm.submit();
-  deliveryForm.remove();
-
-  status.className="email-status success";
-  status.textContent="Your Glow-Up was submitted for email delivery.";
-  setTimeout(()=>$("email-dialog").close(),1800);
 });
 
 // Shared-station privacy reset with accessible warning.
