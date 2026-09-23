@@ -730,11 +730,6 @@ $("email-form").addEventListener("submit",e=>{
     status.textContent="Enter a valid email address.";
     return;
   }
-  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT.indexOf("PASTE_YOUR_NEW_APPS_SCRIPT")===0){
-    status.className="email-status error";
-    status.textContent="Email is not connected yet. Add the new Apps Script /exec URL first.";
-    return;
-  }
   status.className="email-status info";
   status.textContent="Sending your Glow-Up…";
 
