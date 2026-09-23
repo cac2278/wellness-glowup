@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -377,9 +378,9 @@ button,.option,.resource-card{min-height:44px}
 
 </style>
 </head>
-<body><a class="skip-link" href="[#experience](#experience)">Skip to activity</a><div id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<body><a class="skip-link" href="#experience">Skip to activity</a><div id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 <div class="grain" aria-hidden="true"></div>
-<main class="app-shell"><section class="experience" aria-live="polite">
+<main class="app-shell"><section class="experience" id="experience" aria-live="polite">
 <header class="brand-row"><div class="brand-lockup"><span class="parent-brand">GARY J. LENOX LIBRARY</span><div class="brand-mark">WELLNESS GLOW-UP <span>✦</span></div></div><div class="brand-meta"><span>01</span><span>WHOLE-PERSON RESET</span></div></header>
 
 <section id="start-screen" class="screen active start-screen"><div class="start-grid"><div class="start-copy">
@@ -635,11 +636,7 @@ function emailHtml(){
                   <tr>
                     <td width="175" valign="middle" align="center" style="padding:17px 8px 17px 17px;">
                       <table role="presentation" width="145" cellspacing="0" cellpadding="0" border="0" bgcolor="#ede1ff" style="width:145px;background:#ede1ff;border:3px solid #5b2a86;">
-                        <tr>
-                          <td align="center" style="padding:8px;background:#ffd9e8;" bgcolor="#ffd9e8">
-                            <img src="cid:camillePhoto" width="125" alt="Camille Charette, Rock Campus Librarian" style="display:block;width:125px;max-width:125px;height:auto;border:0;">
-                          </td>
-                        </tr>
+                        <tr><td align="center" style="padding:22px 8px 10px;background:#ffd9e8;font-family:Georgia,'Times New Roman',serif;font-size:46px;line-height:1;color:#5b2a86;font-weight:700;" bgcolor="#ffd9e8">CC</td></tr>
                         <tr><td align="center" style="padding-top:6px;font-family:Arial,sans-serif;font-size:17px;color:#5b2a86;font-weight:900;">✦ ♡ ✦</td></tr>
                         <tr><td align="center" style="padding:2px 4px 8px 4px;"><span style="display:inline-block;background:#ffd9e8;padding:5px 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:900;color:#5b2a86;">ASK ME ANYTHING ♡</span></td></tr>
                       </table>
@@ -711,30 +708,12 @@ function finish(){
   $("book-location").textContent=chosenBook.l;$("book-call").textContent=chosenBook.c;
   renderResources();show("result");
   announce(`Your Wellness Glow-Up is ${r.title}. Your Lenox Library pick is ${chosenBook.t}.`);
-  if(!completionLogged){completionLogged=true;logAnonymousEvent("quiz_completed");}
 }
 function renderStep(){const s=results[finalKey].steps[step];$("reset-step-current").textContent=String(step+1).padStart(2,"0");$("reset-step-label").textContent=s[0];$("reset-step-title").textContent=s[0];$("reset-step-body").textContent=s[1];$("reset-step-tip").textContent=s[2];$("reset-next-btn").innerHTML=step===2?'GLOW-UP COMPLETE <span>↗</span>':'GOT IT <span>↗</span>'}
 function restart(){if($("email-dialog")&&$("email-dialog").open)$("email-dialog").close();if($("timeout-dialog")&&$("timeout-dialog").open)$("timeout-dialog").close();current=0;answers=[];finalKey=null;step=0;chosenBook=null;sessionId=createSessionId();completionLogged=false;show("start")}
 $("start-btn").onclick=()=>{current=0;answers=[];show("quiz");render()};$("back-btn").onclick=()=>{if(current){current--;render()}};$("do-reset-btn").onclick=()=>{step=0;show("how");renderStep()};$("reset-next-btn").onclick=()=>{if(step<2){step++;renderStep()}else{$("complete-message").textContent="You just gave one part of your wellness a few minutes of deliberate care. That's a real move.";show("complete")}};$("back-result-btn").onclick=()=>show("result");document.querySelectorAll("[data-restart]").forEach(b=>b.onclick=restart);
 
-const EMAIL_ENDPOINT="https://script.google.com/macros/s/AKfycbzTGP38BXCE4SxQLcUpjUr5TL8nOE8AHRumlRLuZ4dUZmzgCdvNRDH295asOpvVQhoFpQ/exec";
-function logAnonymousEvent(eventName){
-  if(!finalKey||!chosenBook)return;
-  fetch(EMAIL_ENDPOINT,{
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"text/plain;charset=utf-8"},
-    keepalive:true,
-    body:JSON.stringify({
-      action:"log_event",
-      event:eventName,
-      session_id:sessionId,
-      result_key:finalKey,
-      result_title:results[finalKey].title,
-      book_title:chosenBook.t
-    })
-  }).catch(()=>{});
-}
+const EMAIL_ENDPOINT="PASTE_YOUR_NEW_APPS_SCRIPT_EXEC_URL_HERE";
 $("email-results-btn").onclick=()=>{
   $("email-status").textContent="";
   $("email-address").value="";
@@ -742,7 +721,7 @@ $("email-results-btn").onclick=()=>{
   setTimeout(()=>$("email-address").focus(),50);
 };
 $("email-close").onclick=()=>$("email-dialog").close();
-$("email-form").addEventListener("submit",async e=>{
+$("email-form").addEventListener("submit",e=>{
   e.preventDefault();
   const email=$("email-address").value.trim();
   const status=$("email-status");
@@ -751,31 +730,54 @@ $("email-form").addEventListener("submit",async e=>{
     status.textContent="Enter a valid email address.";
     return;
   }
+  if(EMAIL_ENDPOINT==="PASTE_YOUR_NEW_APPS_SCRIPT_EXEC_URL_HERE"){
+    status.className="email-status error";
+    status.textContent="Email is not connected yet. Add the new Apps Script /exec URL first.";
+    return;
+  }
   status.className="email-status info";
   status.textContent="Sending your Glow-Up…";
-  try{
-    await fetch(EMAIL_ENDPOINT,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify({
-        action:"send_email",
-        email,
-        subject:"Your Wellness Glow-Up",
-        message:emailMessage(),
-        html_message:emailHtml(),
-        photo_base64:LIBRARIAN.portraitBase64,
-        photo_mime:LIBRARIAN.portraitMime
-      })
-    });
-    status.className="email-status success";
-    status.textContent="Sent! Your Wellness Glow-Up is on its way.";
-    logAnonymousEvent("results_emailed");
-    setTimeout(()=>$("email-dialog").close(),1400);
-  }catch(err){
-    status.className="email-status error";
-    status.textContent="That didn't send. Please try again.";
+
+  let frame=document.getElementById("email-delivery-frame");
+  if(!frame){
+    frame=document.createElement("iframe");
+    frame.id="email-delivery-frame";
+    frame.name="email-delivery-frame";
+    frame.title="Email delivery";
+    frame.hidden=true;
+    frame.setAttribute("aria-hidden","true");
+    document.body.appendChild(frame);
   }
+
+  const deliveryForm=document.createElement("form");
+  deliveryForm.method="POST";
+  deliveryForm.action=EMAIL_ENDPOINT;
+  deliveryForm.target="email-delivery-frame";
+  deliveryForm.acceptCharset="UTF-8";
+  deliveryForm.style.display="none";
+
+  const payload={
+    action:"send_email",
+    email:email,
+    subject:"Your Wellness Glow-Up",
+    message:emailMessage(),
+    html_message:emailHtml()
+  };
+
+  Object.entries(payload).forEach(([name,value])=>{
+    const field=document.createElement("textarea");
+    field.name=name;
+    field.value=value;
+    deliveryForm.appendChild(field);
+  });
+
+  document.body.appendChild(deliveryForm);
+  deliveryForm.submit();
+  deliveryForm.remove();
+
+  status.className="email-status success";
+  status.textContent="Your Glow-Up was submitted for email delivery.";
+  setTimeout(()=>$("email-dialog").close(),1800);
 });
 
 // Shared-station privacy reset with accessible warning.
@@ -815,4 +817,3 @@ setInterval(()=>{
   }
 },5000);
 </script></body></html>
-
