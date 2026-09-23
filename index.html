@@ -74,7 +74,6 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
 .result-actions{display:grid;gap:10px;margin-top:16px}.save-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.centered{justify-self:center}
 .how-screen{background:linear-gradient(135deg,#e8fbff 0%,#fff8ed 45%,#ffdff1 100%);color:var(--ink)}.how-screen::after{content:"✦";position:absolute;right:9%;top:13%;font-size:74px;color:var(--yellow);text-shadow:3px 3px 0 var(--ink);transform:rotate(8deg)}.reset-header{display:flex;justify-content:space-between;align-items:center}.reset-header .eyebrow{color:#0d9eb6}.reset-counter{font-family:Inter,sans-serif;font-size:18px;font-weight:1000;background:var(--aqua);border:2px solid var(--ink);border-radius:999px;padding:7px 12px;transform:rotate(3deg)}.reset-stage{max-width:780px;margin-top:72px}.reset-step-label{display:inline-block;color:var(--ink);background:var(--pink);padding:7px 11px;border-radius:8px;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink)}.reset-stage h2{font-family:Inter,sans-serif;font-size:clamp(58px,9vw,105px);font-weight:1000;line-height:.82;margin:20px 0 28px;text-transform:none;letter-spacing:-.075em}.how-intro{font-family:Georgia,serif;font-size:22px;line-height:1.5;max-width:670px;color:#354a57}.how-callout{margin:28px 0 32px;max-width:650px;background:var(--yellow);border:2px solid var(--ink);border-radius:16px;padding:14px 17px;color:var(--ink);font-weight:800;line-height:1.45;transform:rotate(-1deg);box-shadow:4px 4px 0 rgba(11,32,48,.13)}
 .complete-screen{background:linear-gradient(145deg,#d8fff7 0%,#ffd6ef 46%,#fff1a8 100%);color:var(--ink)}.complete-screen::before{content:"☺";position:absolute;right:9%;top:14%;font-size:82px;color:var(--yellow);filter:drop-shadow(3px 3px 0 var(--ink));transform:rotate(9deg)}.complete-screen::after{content:"SAME YOU.\A BRIGHTER THINGS AHEAD.";white-space:pre;position:absolute;right:7%;bottom:10%;font-size:22px;line-height:.95;font-weight:1000;transform:rotate(-7deg);text-align:center}.complete-inner{max-width:760px;position:relative;z-index:2}.complete-inner .eyebrow{display:inline-block;color:var(--ink);background:var(--lav);border:2px solid var(--ink);border-radius:9px;padding:7px 11px;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink)}.complete-inner h2{font-family:Inter,sans-serif;font-size:clamp(78px,11vw,132px);font-weight:1000;line-height:.72;margin:34px 0 38px;text-transform:uppercase;letter-spacing:-.08em}.complete-inner h2 em{font-family:Georgia,serif;text-transform:none;background:linear-gradient(transparent 50%,#8fe8ff 50% 89%,transparent 89%);font-weight:700}.complete-message{font-family:Georgia,serif;font-size:24px;line-height:1.4;max-width:620px}.complete-meta{display:flex;gap:12px;flex-wrap:wrap;margin:38px 0 30px;font-size:11px;letter-spacing:.10em;font-weight:1000}.complete-meta span{background:white;border:2px solid var(--ink);padding:9px 12px;border-radius:999px}.complete-meta span:nth-child(2){background:var(--lime)}
-.email-dialog{width:min(92vw,540px);border:0;padding:0;background:linear-gradient(135deg,#fff8ed,#ffdff0);box-shadow:0 30px 90px rgba(0,0,0,.28);border-radius:28px}.email-dialog::backdrop{background:rgba(11,32,48,.60);backdrop-filter:blur(5px)}.email-dialog form{padding:34px;position:relative}.email-dialog h2{font-size:44px;margin:10px 0 12px}.email-dialog p{line-height:1.5;color:#4f5e69}.email-dialog label{display:block;font-weight:1000;margin:22px 0 8px}.email-dialog input{width:100%;min-height:54px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:0 14px}.dialog-close{position:absolute;right:17px;top:14px;border:0;background:transparent;font-size:32px;cursor:pointer}.wide{width:100%;margin-top:10px}.email-status{min-height:22px;font-size:13px}.email-status.success{color:#237d59}.email-status.error{color:#a23d53}
 @media(max-width:760px){.screen{padding:28px 20px 34px}.brand-row{padding:16px 18px}.brand-meta span:last-child{display:none}.start-grid,.plan-intro,.plan-columns{grid-template-columns:1fr}.start-side{margin-top:20px}.start-copy h1{font-size:56px}.question-layout{grid-template-columns:1fr}.question-index{font-size:38px}.question-main h2{font-size:40px}.save-row{grid-template-columns:1fr}.result-copy h2{font-size:58px}.result-frame::before,.result-frame::after,.complete-screen::after{opacity:.25}.reset-stage{margin-top:52px}.reset-stage h2{font-size:58px}.complete-inner h2{font-size:82px}.complete-message{font-size:20px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
@@ -87,7 +86,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
 .send-choice-btn.active{background:#f7d957;box-shadow:3px 3px 0 var(--ink)}
 .send-choice-btn:focus-visible{outline:3px solid #72d6cf;outline-offset:2px}
 
-<br>
+
 /* v9 — email-only take-away. No SMS/text control exists. */
 .email-only-row{
   grid-template-columns:1fr !important;
@@ -240,7 +239,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
   .action-dialog h2{font-size:52px !important}
 }
 
-<br>
+
 /* v11 — keep the playful quiz note out of the question content.
    Previously the absolutely-positioned note could overlap the longer Q6 title. */
 .quiz-screen::after{
@@ -257,12 +256,6 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
 
 .quiz-screen{
   padding-top:50px !important;
-}
-
-/* Give the final, five-choice question enough breathing room without
-   changing the scale or layout of the other questions. */
-.quiz-screen:has(#progress-label){
-  min-height:100%;
 }
 
 @media (max-width:760px){
@@ -285,7 +278,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
   }
 }
 
-<br>
+
 
 /* v12 — Lenox Library parent-brand integration */
 .brand-lockup{
@@ -315,12 +308,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
   .brand-lockup .brand-mark{font-size:13px}
 }
 
-<br>
+
 
 /* Wellness Glow-Up prototype additions */
 .book-feature{margin-top:28px;background:linear-gradient(135deg,#fff,#f5fffb 48%,#fff0f8);border:2px solid var(--ink);border-radius:24px;padding:26px;box-shadow:7px 8px 0 rgba(11,32,48,.10);position:relative;overflow:hidden}.book-feature::after{content:"READ ME ✦";position:absolute;right:22px;top:20px;font-weight:1000;font-size:12px;letter-spacing:.12em;transform:rotate(5deg);background:var(--yellow);padding:7px 10px;border:2px solid var(--ink);border-radius:999px}.book-stamp{font-size:11px;font-weight:1000;letter-spacing:.14em;color:#0d8f7f}.book-feature h3{font-family:Georgia,serif;font-size:clamp(30px,4vw,46px);line-height:1.02;margin:18px 110px 10px 0}.book-feature>p{max-width:680px;line-height:1.5}.book-location{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:20px;padding-top:17px;border-top:1px solid var(--line);align-items:center}.book-location span{font-size:10px;font-weight:1000;letter-spacing:.14em;background:var(--aqua);padding:7px 9px;border-radius:999px}.book-location strong{font-size:14px}.shelf-line{font-weight:900!important;color:#5b2a86!important;margin-bottom:0!important}.reset-startover{display:block;margin:22px auto 0}.option-btn strong{text-align:left}
 
-<br>
+
 /* Wellness Glow-Up additions: campus resources + email + universal restart */
 .campus-resources{margin-top:24px;background:#fff;border:2px solid var(--ink);border-radius:24px;padding:26px;box-shadow:7px 8px 0 rgba(11,32,48,.10)}
 .campus-resources .resource-heading{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}
@@ -349,7 +342,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spac
 .email-status.success{color:#16765f}.email-status.error{color:#a53b53}.email-status.info{color:#44576a}
 @media(max-width:760px){.resource-grid{grid-template-columns:1fr}}
 
-<br>
+
 /* v3 accessibility layer */
 .skip-link{position:absolute;left:12px;top:-80px;z-index:9999;background:#fff;color:#0b2030;border:3px solid #0b2030;border-radius:10px;padding:12px 16px;font-weight:900}
 .skip-link:focus{top:12px}
@@ -636,7 +629,7 @@ function emailHtml(){
                   <tr>
                     <td width="175" valign="middle" align="center" style="padding:17px 8px 17px 17px;">
                       <table role="presentation" width="145" cellspacing="0" cellpadding="0" border="0" bgcolor="#ede1ff" style="width:145px;background:#ede1ff;border:3px solid #5b2a86;">
-                        <tr><td align="center" style="padding:22px 8px 10px;background:#ffd9e8;font-family:Georgia,'Times New Roman',serif;font-size:46px;line-height:1;color:#5b2a86;font-weight:700;" bgcolor="#ffd9e8">CC</td></tr>
+                        <tr><td align="center" style="padding:8px 8px 4px;background:#ffd9e8;" bgcolor="#ffd9e8"><img src="cid:camillePortrait" width="129" alt="Camille Charette, Rock Campus librarian" style="display:block;width:129px;max-width:129px;height:auto;border:0;border-radius:8px;"></td></tr>
                         <tr><td align="center" style="padding-top:6px;font-family:Arial,sans-serif;font-size:17px;color:#5b2a86;font-weight:900;">✦ ♡ ✦</td></tr>
                         <tr><td align="center" style="padding:2px 4px 8px 4px;"><span style="display:inline-block;background:#ffd9e8;padding:5px 8px;font-family:Arial,sans-serif;font-size:11px;font-weight:900;color:#5b2a86;">ASK ME ANYTHING ♡</span></td></tr>
                       </table>
@@ -756,7 +749,8 @@ $("email-form").addEventListener("submit",e=>{
     email:email,
     subject:"Your Wellness Glow-Up",
     message:emailMessage(),
-    html_message:emailHtml()
+    html_message:emailHtml(),
+    portrait_base64:LIBRARIAN.portraitBase64 || ""
   };
 
   Object.entries(payload).forEach(([name,value])=>{
