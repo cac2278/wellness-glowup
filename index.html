@@ -713,7 +713,7 @@ function renderStep(){const s=results[finalKey].steps[step];$("reset-step-curren
 function restart(){if($("email-dialog")&&$("email-dialog").open)$("email-dialog").close();if($("timeout-dialog")&&$("timeout-dialog").open)$("timeout-dialog").close();current=0;answers=[];finalKey=null;step=0;chosenBook=null;sessionId=createSessionId();completionLogged=false;show("start")}
 $("start-btn").onclick=()=>{current=0;answers=[];show("quiz");render()};$("back-btn").onclick=()=>{if(current){current--;render()}};$("do-reset-btn").onclick=()=>{step=0;show("how");renderStep()};$("reset-next-btn").onclick=()=>{if(step<2){step++;renderStep()}else{$("complete-message").textContent="You just gave one part of your wellness a few minutes of deliberate care. That's a real move.";show("complete")}};$("back-result-btn").onclick=()=>show("result");document.querySelectorAll("[data-restart]").forEach(b=>b.onclick=restart);
 
-const EMAIL_ENDPOINT="PASTE_YOUR_NEW_APPS_SCRIPT_EXEC_URL_HERE";
+const EMAIL_ENDPOINT="https://script.google.com/macros/s/AKfycbxPWUPvnWwnSGjNjoOocODAVj8zVtFVdvYms2HV_1fF7viwKtmOVfeghIlLJ1-jYIS42A/exec";
 $("email-results-btn").onclick=()=>{
   $("email-status").textContent="";
   $("email-address").value="";
@@ -730,7 +730,7 @@ $("email-form").addEventListener("submit",e=>{
     status.textContent="Enter a valid email address.";
     return;
   }
-  if(EMAIL_ENDPOINT==="PASTE_YOUR_NEW_APPS_SCRIPT_EXEC_URL_HERE"){
+  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT.indexOf("PASTE_YOUR_NEW_APPS_SCRIPT")===0){
     status.className="email-status error";
     status.textContent="Email is not connected yet. Add the new Apps Script /exec URL first.";
     return;
